@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Webhook Demo</title>
+</head>
+<body>
+    <h1>Discord Webhook Demo</h1>
+    
+    <button id="sendMessageButton">Send Message to Discord</button>
+
+    <script>
+        document.getElementById('sendMessageButton').addEventListener('click', function() {
+            sendMessageToDiscord();
+        });
+
+        function sendMessageToDiscord() {
+            // Replace 'YOUR_DISCORD_WEBHOOK_URL' with your actual Discord webhook URL
+            const webhookUrl = 'https://discord.com/api/webhooks/1201949979791593523/w31xI2wMIarUpPISKGO5-CGkpO9GkMV_eeIgyXop40F3EwtsthZMmG1x8wPc6f4Ws6X-';
+
+            const message = {
+                content: 'Hello, World! This message is sent from my GitHub Pages website.'
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to send message to Discord:', response.statusText);
+                } else {
+                    console.log('Message sent successfully!');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending message to Discord:', error);
+            });
+        }
+    </script>
+</body>
+</html>
