@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Changer Demo</title>
+</head>
+<body>
+    <h1>Logo Changer Demo</h1>
+
+    <!-- Logo element with an initial source -->
+    <img id="logo" src="default-logo.png" alt="Logo">
+
+    <!-- Input field for the new logo URL -->
+    <label for="logoUrl">New Logo URL:</label>
+    <input type="text" id="logoUrl" placeholder="Enter URL">
+
+    <!-- Button to change the logo -->
+    <button onclick="changeLogo()">Change Logo</button>
+
+    <script>
+        function changeLogo() {
+            // Get the new logo URL from the input field
+            var newLogoUrl = document.getElementById('logoUrl').value;
+
+            // Get the logo element
+            var logoElement = document.getElementById('logo');
+
+            // Change the logo source if a new URL is provided
+            if (newLogoUrl.trim() !== '') {
+                logoElement.src = newLogoUrl;
+                logoElement.alt = 'New Logo';
+            } else {
+                alert('Please enter a valid logo URL.');
+            }
+        }
+    </script>
+</body>
+</html>
