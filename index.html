@@ -3,43 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Webhook Demo</title>
+    <title>Discord Message Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Discord Webhook Demo</h1>
+    <h1>Discord Message Sender</h1>
     
-    <button id="sendMessageButton">Send Message to Discord</button>
+    <label for="message">Type your message:</label>
+    <textarea id="message" placeholder="Enter your message"></textarea>
+
+    <button onclick="sendMessage()">Send Message</button>
 
     <script>
-        document.getElementById('sendMessageButton').addEventListener('click', function() {
-            sendMessageToDiscord();
-        });
+        function sendMessage() {
+            // Get the message from the textarea
+            var message = document.getElementById('message').value;
 
-        function sendMessageToDiscord() {
-            // Replace 'YOUR_DISCORD_WEBHOOK_URL' with your actual Discord webhook URL
-            const webhookUrl = 'https://discord.com/api/webhooks/1201949979791593523/w31xI2wMIarUpPISKGO5-CGkpO9GkMV_eeIgyXop40F3EwtsthZMmG1x8wPc6f4Ws6X-';
+            // Replace the Discord webhook URL with your actual webhook URL
+            var webhookUrl = 'https://discord.com/api/webhooks/1201949979791593523/w31xI2wMIarUpPISKGO5-CGkpO9GkMV_eeIgyXop40F3EwtsthZMmG1x8wPc6f4Ws6X-';
 
-            const message = {
-                content: '@silent Hello, World! This message is sent from my GitHub Pages website.'
-            };
-
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(message),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    console.error('Failed to send message to Discord:', response.statusText);
-                } else {
-                    console.log('Message sent successfully!');
-                }
-            })
-            .catch(error => {
-                console.error('Error sending message to Discord:', error);
-            });
+            // Check if the message is not empty
+            if (message.trim() !== '') {
+                // Send the message to the Discord webhook using Fetch API
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        content: message,
+                    }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Server responded with ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(responseText => {
+                    alert('Message sent successfully!');
+                    console.log(responseText);
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Failed to send message.');
+                });
+            } else {
+                alert('Please enter a message.');
+            }
         }
     </script>
 </body>
