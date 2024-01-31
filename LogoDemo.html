@@ -3,69 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Your Website</title>
+    
+    <!-- Set the website title -->
+    <title>Your Website</title>
+
+    <!-- Set the favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Set the website header image -->
+    <style>
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    <h1 id="pageHeading">Welcome to Your Website</h1>
 
-    <!-- Logo element with an initial source -->
-    <img id="logo" src="default-logo.png" alt="Logo">
+    <!-- Website header with logo -->
+    <header>
+        <h1>Your Website</h1>
+        <img src="header-logo.png" alt="Website Logo">
+    </header>
 
-    <!-- Input fields for the new logo URL and title -->
-    <label for="logoUrl">New Logo URL:</label>
-    <input type="text" id="logoUrl" placeholder="Enter URL">
+    <!-- Rest of your website content goes here -->
 
-    <label for="pageTitleInput">New Title:</label>
-    <input type="text" id="pageTitleInput" placeholder="Enter Title">
-
-    <!-- Button to update the logo and title (only if the 'Odata' cookie is set to 1) -->
-    <button onclick="updateLogoAndTitle()">Update Logo and Title</button>
-
-    <script>
-        // Function to update the logo and title
-        function updateLogoAndTitle() {
-            // Check if the 'Odata' cookie is set to 1
-            var odataCookie = getCookie('Odata');
-
-            if (odataCookie !== '1') {
-                alert('You do not have permission to update the logo and title.');
-                return;
-            }
-
-            // Get the new logo URL and title from the input fields
-            var newLogoUrl = document.getElementById('logoUrl').value;
-            var newTitle = document.getElementById('pageTitleInput').value;
-
-            // Get the logo and title elements
-            var logoElement = document.getElementById('logo');
-            var titleElement = document.getElementById('pageTitle');
-
-            // Change the logo source and title if new values are provided
-            if (newLogoUrl.trim() !== '') {
-                logoElement.src = newLogoUrl;
-                logoElement.alt = 'Custom Logo';
-            }
-
-            if (newTitle.trim() !== '') {
-                titleElement.textContent = newTitle;
-            }
-        }
-
-        // Function to get the value of a cookie by name
-        function getCookie(cookieName) {
-            var name = cookieName + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var cookieArray = decodedCookie.split(';');
-
-            for (var i = 0; i < cookieArray.length; i++) {
-                var cookie = cookieArray[i].trim();
-                if (cookie.indexOf(name) === 0) {
-                    return cookie.substring(name.length, cookie.length);
-                }
-            }
-
-            return "";
-        }
-    </script>
 </body>
 </html>
